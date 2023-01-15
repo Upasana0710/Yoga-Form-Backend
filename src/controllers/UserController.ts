@@ -84,7 +84,7 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
 export const deleteUser = async (req: Request, res: Response, next: NextFunction)=>{
     const userId = String(req.params.id);
     try{
-        const user = await prisma.user.delete({
+        await prisma.user.delete({
             where: {
                 id: userId,
             }
@@ -92,7 +92,6 @@ export const deleteUser = async (req: Request, res: Response, next: NextFunction
         res.status(200).json({
             message: "Successfully deleted user"
         })
-        next()
     }catch(error){
         next(ApiError.internalServerError("Something went wrong"))
     }
